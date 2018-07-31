@@ -9,10 +9,12 @@
 /** this is a dummy single-line comment needed for documentation build; a hack for https://github.com/TypeStrong/typedoc/issues/603 */
 
 import * as fse from 'fs-extra'
-import { parseItem } from '../tap-main'
+import { target_text } from '../tap-main'
+//import { targetText} from '../tap-main'
 import * as path from 'path'
 
 let fileToParse = process.argv[2] // process the file indicated by a parameter passed in
+console.log(fileToParse)
 if (fileToParse.endsWith('.ts') || fileToParse.endsWith('.js')) {
   console.error(
     'Uh-oh! you are trying to parse "' +
@@ -27,8 +29,8 @@ if (fileToParse.endsWith('.ts') || fileToParse.endsWith('.js')) {
 let debugParseItem = async () => {
   try {
     let buffer = await fse.readFile(fileToParse)
-    let value = await parseItem(buffer)
-    console.log(JSON.stringify(value))
+    // let value = await target_text(buffer,"")//configure this
+    //console.log(JSON.stringify(value))
   } catch (error) {
     console.error(error)
   }

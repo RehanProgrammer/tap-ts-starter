@@ -8,10 +8,11 @@
 export default class DummyClass {}
 
 import * as configLoader from './singer/tap-load-config'
-import * as parseMime from './parse-mime'
-export { parseItem } from './parse-mime'
+//import * as parseMime from './parse-mime'
+//export { parseItem } from './parse-mime'
 import * as scanDir from './scan-dir'
-
+import * as handleBars from './handlerBars'
+export * from './handlerBars'
 // show developers that code has started to run
 console.log('working!')
 
@@ -23,7 +24,7 @@ console.log('working!')
 async function mainFunction() {
   try {
     var configObjs = await configLoader.loadConfig()
-    return scanDir.scanDir(configObjs, parseMime.parseItem)
+    return scanDir.scanDir(configObjs, handleBars.target_text)
   } catch (error) {
     // Handle errors
     console.error('Error: ', error)

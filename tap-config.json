@@ -1,5 +1,7 @@
 {
     "target_folder" : "./testdata/tests",
+    "templateFolder": "./testdata/template",
+    "template" : {},
     "start_date" : "2017-01-01T00:00:00Z",
     "user_agent" : "Stitch (+support@stitchdata.com)"
   }

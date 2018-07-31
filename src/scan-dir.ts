@@ -8,7 +8,7 @@
 /** fs-extra is a promise-enabled superset of the standard fs package */
 import * as fse from 'fs-extra'
 import * as tapTypes from './singer/tap-types'
-
+import * as targetText from './tap-main'
 /** generate json-schemas for our records, if needed */
 var generateSchema = require('generate-schema') // typescript types aren't available so we load javascript-style instead of using typescript's import
 
@@ -19,7 +19,7 @@ var generateSchema = require('generate-schema') // typescript types aren't avail
  * @param configObjs
  * @param parser
  */
-export async function scanDir(configObjs: tapTypes.allConfigs, parser: any) {
+export async function scanDir(configObjs: targetText.allConfigs, parser: any) {
   let config = configObjs.config
   // future config options
   // let state = configObjs.state
@@ -38,6 +38,8 @@ export async function scanDir(configObjs: tapTypes.allConfigs, parser: any) {
     // return an array of promises, one per filename, for Promise.all to run asynchronously
     filelist.map(async function(filename, idx) {
       let buffer = await fse.readFile(config.target_folder + '/' + filename)
+      let templateFile = await fse.readFile(config.templateFolder + '/' + filename)
+      configObjs.config.template = JSON.parse(templateFile.toString())
       return parser(buffer, configObjs) // the parsing is done here
     })
   )
